@@ -1,18 +1,20 @@
- const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
-const { stdin } = require('process');
+const { stdins } = require('process');
+const { stdin: input, stdout: output } = require('process');
+const readline = require('readline')
 
+const rl = readline.createInterface({ input, output });
 let writeStream = fs.createWriteStream(path.resolve(__dirname, 'random.txt'));
+
 console.log('Привет, введите текст для записи в файл "random.txt"');
-stdin.on('data', chunk => {
-  let temp = chunk.toString().substring(0, chunk.toString().length - 1);
-  temp = temp;
-  if (temp === 'exit') { 
+rl.on('line', (input) => {
+  if (input === 'exit' ) { 
     console.log('Спасибо, запись прервана, данные в файле: "random.txt"');
     process.exit();
-  } else writeStream.write(temp + '\n')
+  } else writeStream.write(input + '\n')
 })
-process.on('SIGINT', function() {
-  console.log('\nСпасибо, запись прервана, данные в файле: "random.txt"');
+rl.on('SIGINT', () => {
+  console.log('Спасибо, запись прервана, данные в файле: "random.txt"');
   process.exit();
-});
+})
