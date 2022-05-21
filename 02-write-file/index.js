@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { stdins } = require('process');
 const { stdin: input, stdout: output } = require('process');
 const readline = require('readline')
 
