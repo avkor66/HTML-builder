@@ -1,16 +1,16 @@
 const { readdir, mkdir, rm } = require('fs/promises');
-const fs = require('fs')
+const fs = require('fs');
 const path = require('path');
 
 
 async function createFolder(newDir, fromDir) {
   await rm(path.resolve(__dirname, newDir), { recursive: true, force: true }, (err) => {
     if (err) throw err;
-  })
+  });
   await mkdir(path.resolve(__dirname, newDir), { recursive: true }, (err) => {
     if (err) throw err;
-  })
-  await copyFiles(path.resolve(__dirname, fromDir), newDir)
+  });
+  await copyFiles(path.resolve(__dirname, fromDir), newDir);
 }
 
 async function copyFiles(params, newDir) {
@@ -18,14 +18,14 @@ async function copyFiles(params, newDir) {
   filesForCopy.forEach(fl => {
     let readStream = fs.createReadStream(path.resolve(params, fl));
     let writeStream = fs.createWriteStream(path.resolve(__dirname, newDir, fl));
-    let temp = ''
+    let temp = '';
     readStream.on('data', (chunk) => {
       temp += chunk.toString();
-    })
+    });
     readStream.on('end', () => {
-      writeStream.write(temp)
-    })
-  })
+      writeStream.write(temp);
+    });
+  });
 }
 
-createFolder('files-copy', 'files')
+createFolder('files-copy', 'files');
