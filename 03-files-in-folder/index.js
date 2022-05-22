@@ -1,4 +1,4 @@
-const { readdir, stat } = require('fs/promises');
+const { readdir } = require('fs/promises');
 const fs = require('fs')
 const path = require('path');
 
