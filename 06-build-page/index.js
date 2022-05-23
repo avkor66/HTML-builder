@@ -71,6 +71,7 @@ async function createHTML() {
           const element = obj[key];
           const reg = new RegExp(`{{${key}}}`, 'i');
           html = html.replace(reg, element);
+          html = html.replace(reg, element);
         }
       }
       writeIndexHTML.write(html);

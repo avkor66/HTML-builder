@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = require('PATH');
+const path = require('path');
 let readStream = fs.createReadStream(path.resolve(__dirname, 'text.txt'));
 let temp = '';
 readStream.on('data', (chunk) => {
